@@ -114,6 +114,7 @@ class MSDepthViewController: UIViewController {
     super.viewWillAppear(animated)
     backgroundView.backgroundColor = backgroundColor
     animationImageView.image = convertImage
+    animationImageView.contentMode = .Center
     let tap = UITapGestureRecognizer(target: self, action: "dissmissPresentView")
     coverView.addGestureRecognizer(tap)
     self.popupPosition()

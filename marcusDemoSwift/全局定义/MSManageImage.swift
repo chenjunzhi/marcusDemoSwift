@@ -21,7 +21,7 @@ class MSManageImage {
     return image
   }
   
-  //对某个图片进行
+  //对某个图片进行缩小  将原图缩小为 scale  背景用 background 填充
   class func scaleImage(image:UIImage,scale:CGFloat,background:UIColor) -> UIImage {
     let imageSize = image.size
     UIGraphicsBeginImageContextWithOptions(imageSize, true, image.scale);
@@ -33,6 +33,24 @@ class MSManageImage {
     UIGraphicsBeginImageContext(imageSize)
     backGroundImage.drawInRect(CGRectMake(0, 0, imageSize.width, imageSize.height))
     image.drawInRect(CGRectMake(imageSize.width*(1.0-scale)*0.5, imageSize.height*(1.0-scale)*0.5, imageSize.width*scale, imageSize.height*scale))
+    let newImage = UIGraphicsGetImageFromCurrentImageContext()
+    UIGraphicsEndImageContext()
+    return newImage
+  }
+  
+//  //对某个图片进行放大  将原图尺寸不变  背景用 background 填充，并放大为 1/scale 倍
+  class func specialScaleImage(image:UIImage,scale:CGFloat,background:UIColor) -> UIImage {
+    let imageSize = image.size
+    let newImageSize = CGSizeMake(image.size.width/scale, image.size.height/scale)
+    UIGraphicsBeginImageContextWithOptions(newImageSize, false, 1.0);
+    background.set()
+    UIRectFill(CGRectMake(0, 0, imageSize.width/scale, imageSize.height/scale))
+    let backGroundImage = UIGraphicsGetImageFromCurrentImageContext()
+    UIGraphicsEndImageContext();
+    
+    UIGraphicsBeginImageContext(newImageSize)
+    backGroundImage.drawInRect(CGRectMake(0, 0, imageSize.width/scale, imageSize.height/scale))
+    image.drawInRect(CGRectMake(imageSize.width*((1.0-scale)/scale)*0.5, imageSize.height*((1.0-scale)/scale)*0.5, imageSize.width, imageSize.height))
     let newImage = UIGraphicsGetImageFromCurrentImageContext()
     UIGraphicsEndImageContext()
     return newImage

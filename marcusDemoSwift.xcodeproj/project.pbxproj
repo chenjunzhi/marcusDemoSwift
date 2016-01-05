@@ -199,6 +199,9 @@
 		2C76386E1C030284008D8C5B /* marcusDemoSwiftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76386D1C030284008D8C5B /* marcusDemoSwiftUITests.swift */; };
 		2C8192181C2D127B00BA619F /* MSDepthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8192171C2D127B00BA619F /* MSDepthViewController.swift */; };
 		2C81921C1C2D17DB00BA619F /* MSManageImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C81921B1C2D17DB00BA619F /* MSManageImage.swift */; };
+		2C91FA2B1C3B6E4400ABB3FB /* MSGPUViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C91FA291C3B6E4400ABB3FB /* MSGPUViewController.swift */; };
+		2C91FA2C1C3B6E4400ABB3FB /* MSGPUViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C91FA2A1C3B6E4400ABB3FB /* MSGPUViewController.xib */; };
+		2C91FA2E1C3B719B00ABB3FB /* 1347158_132411659346_2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2C91FA2D1C3B719B00ABB3FB /* 1347158_132411659346_2.jpg */; };
 		2CC3CC971C2ADE330048AD26 /* MSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC3CC951C2ADE330048AD26 /* MSViewController.swift */; };
 		2CC3CC981C2ADE330048AD26 /* MSViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CC3CC961C2ADE330048AD26 /* MSViewController.xib */; };
 		2CC3CC9B1C2AE41C0048AD26 /* MSGuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC3CC991C2AE41C0048AD26 /* MSGuideViewController.swift */; };
@@ -599,6 +602,9 @@
 		2C7DBA871C3A4978001A699B /* marcusDemoSwift-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "marcusDemoSwift-Bridging-Header.h"; sourceTree = "<group>"; };
 		2C8192171C2D127B00BA619F /* MSDepthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MSDepthViewController.swift; sourceTree = "<group>"; };
 		2C81921B1C2D17DB00BA619F /* MSManageImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MSManageImage.swift; sourceTree = "<group>"; };
+		2C91FA291C3B6E4400ABB3FB /* MSGPUViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MSGPUViewController.swift; sourceTree = "<group>"; };
+		2C91FA2A1C3B6E4400ABB3FB /* MSGPUViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MSGPUViewController.xib; sourceTree = "<group>"; };
+		2C91FA2D1C3B719B00ABB3FB /* 1347158_132411659346_2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1347158_132411659346_2.jpg; sourceTree = "<group>"; };
 		2CC3CC951C2ADE330048AD26 /* MSViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MSViewController.swift; sourceTree = "<group>"; };
 		2CC3CC961C2ADE330048AD26 /* MSViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MSViewController.xib; sourceTree = "<group>"; };
 		2CC3CC991C2AE41C0048AD26 /* MSGuideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MSGuideViewController.swift; sourceTree = "<group>"; };
@@ -645,6 +651,8 @@
 			children = (
 				2C1A90F71C2AACFD009C405D /* MSStudySampleVC.swift */,
 				2C1A90F81C2AACFD009C405D /* MSStudySampleVC.xib */,
+				2C91FA291C3B6E4400ABB3FB /* MSGPUViewController.swift */,
+				2C91FA2A1C3B6E4400ABB3FB /* MSGPUViewController.xib */,
 			);
 			path = "主界面";
 			sourceTree = "<group>";
@@ -1084,6 +1092,7 @@
 				2C76384D1C030284008D8C5B /* AppDelegate.swift */,
 				2C76384F1C030284008D8C5B /* ViewController.swift */,
 				2C7638561C030284008D8C5B /* LaunchScreen.storyboard */,
+				2C91FA2D1C3B719B00ABB3FB /* 1347158_132411659346_2.jpg */,
 				2C7638511C030284008D8C5B /* Main.storyboard */,
 				2C7DBA871C3A4978001A699B /* marcusDemoSwift-Bridging-Header.h */,
 				2C238B161C3A567100635B91 /* OC过渡代码 */,
@@ -1249,8 +1258,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C1A90FC1C2AACFD009C405D /* MSStudySampleVC.xib in Resources */,
+				2C91FA2E1C3B719B00ABB3FB /* 1347158_132411659346_2.jpg in Resources */,
 				2CC3CC981C2ADE330048AD26 /* MSViewController.xib in Resources */,
 				2C7638581C030284008D8C5B /* LaunchScreen.storyboard in Resources */,
+				2C91FA2C1C3B6E4400ABB3FB /* MSGPUViewController.xib in Resources */,
 				2C747D6C1C243C45002DEC78 /* Assets.xcassets in Resources */,
 				2C7638531C030284008D8C5B /* Main.storyboard in Resources */,
 				2CC3CC9C1C2AE41C0048AD26 /* MSGuideViewController.xib in Resources */,
@@ -1446,6 +1457,7 @@
 				2C238C941C3A568C00635B91 /* GPUImageColorMatrixFilter.m in Sources */,
 				2C238CC61C3A568C00635B91 /* GPUImageKuwaharaRadius3Filter.m in Sources */,
 				2C57E5841C2BD01D0098A583 /* MSApplication.swift in Sources */,
+				2C91FA2B1C3B6E4400ABB3FB /* MSGPUViewController.swift in Sources */,
 				2C238D241C3A568C00635B91 /* GPUImageMovieWriter.m in Sources */,
 				2C238CE81C3A568C00635B91 /* GPUImagePixellateFilter.m in Sources */,
 				2C238CC11C3A568C00635B91 /* GPUImageHueBlendFilter.m in Sources */,

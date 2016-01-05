@@ -10,7 +10,7 @@ import UIKit
 
 class MSStudySampleVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
   
-  var sampleArrayData = ["景深效果测试上","景深效果测试下","景深效果测试左","景深效果测试右"]
+  var sampleArrayData = ["景深效果测试上","景深效果测试下","景深效果测试左","景深效果测试右","测试GPUImage测试GPUImage测试GPUImage测试GPUImage测试GPUImage测试GPUImage"]
   
   @IBOutlet weak var mainTableView: UITableView!
   override func viewDidLoad() {
@@ -79,6 +79,10 @@ class MSStudySampleVC: UIViewController,UITableViewDelegate,UITableViewDataSourc
     case 3:
       tempView.frame = CGRectMake(0, 0, MSApplication.sharedApplication().screenWidth/2, MSApplication.sharedApplication().screenHeight)
       MSDepthViewController.presentDepthView(tempView, backgroundColor: UIColor.whiteColor(), animateDuration: 0.3, popupStyle: DepthPopupStyle.Right, blur:0.6, depthSacle: 0.9)
+      break
+    case 4:
+      let gpuVC = MSGPUViewController.init()
+      self.presentViewController(gpuVC, animated: true, completion: nil)
       break
     default:
       break
