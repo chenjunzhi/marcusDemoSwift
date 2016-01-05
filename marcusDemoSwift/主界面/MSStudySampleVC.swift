@@ -66,19 +66,19 @@ class MSStudySampleVC: UIViewController,UITableViewDelegate,UITableViewDataSourc
     switch(indexPath.row){
     case 0:
       tempView.frame = CGRectMake(0, 0, MSApplication.sharedApplication().screenWidth, MSApplication.sharedApplication().screenHeight/2)
-      MSDepthViewController.presentDepthView(tempView, backgroundColor: nil, animateDuration: 0.3, popupStyle: DepthPopupStyle.Top, blur: 1.0, depthSacle: 0.8)
+      MSDepthViewController.presentDepthView(tempView, backgroundColor: nil, animateDuration: 0.3, popupStyle: DepthPopupStyle.Top, blur: 0.1, depthSacle: 0.9)
       break
     case 1:
       tempView.frame = CGRectMake(0, 0, MSApplication.sharedApplication().screenWidth, MSApplication.sharedApplication().screenHeight/2)
-      MSDepthViewController.presentDepthView(tempView, backgroundColor: nil, animateDuration: 0.3, popupStyle: DepthPopupStyle.Bottom, blur: 1.0, depthSacle: 0.9)
+      MSDepthViewController.presentDepthView(tempView, backgroundColor: nil, animateDuration: 0.3, popupStyle: DepthPopupStyle.Bottom, blur: 0.2, depthSacle: 0.9)
       break
     case 2:
       tempView.frame = CGRectMake(0, 0, MSApplication.sharedApplication().screenWidth/2, MSApplication.sharedApplication().screenHeight)
-      MSDepthViewController.presentDepthView(tempView, backgroundColor: UIColor.whiteColor(), animateDuration: 0.3, popupStyle: DepthPopupStyle.Left, blur: 0.4, depthSacle: 0.9)
+      MSDepthViewController.presentDepthView(tempView, backgroundColor: nil, animateDuration: 0.3, popupStyle: DepthPopupStyle.Left, blur: 0.4, depthSacle: 0.9)
       break
     case 3:
       tempView.frame = CGRectMake(0, 0, MSApplication.sharedApplication().screenWidth/2, MSApplication.sharedApplication().screenHeight)
-      MSDepthViewController.presentDepthView(tempView, backgroundColor: UIColor.redColor(), animateDuration: 0.3, popupStyle: DepthPopupStyle.Right, blur: 0.9, depthSacle: 0.9)
+      MSDepthViewController.presentDepthView(tempView, backgroundColor: UIColor.whiteColor(), animateDuration: 0.3, popupStyle: DepthPopupStyle.Right, blur:0.6, depthSacle: 0.9)
       break
     default:
       break

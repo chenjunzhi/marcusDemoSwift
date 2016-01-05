@@ -21,6 +21,23 @@ class MSManageImage {
     return image
   }
   
+  //对某个图片进行
+  class func scaleImage(image:UIImage,scale:CGFloat,background:UIColor) -> UIImage {
+    let imageSize = image.size
+    UIGraphicsBeginImageContextWithOptions(imageSize, true, image.scale);
+    background.set()
+    UIRectFill(CGRectMake(0, 0, imageSize.width, imageSize.height))
+    let backGroundImage = UIGraphicsGetImageFromCurrentImageContext()
+    UIGraphicsEndImageContext();
+    
+    UIGraphicsBeginImageContext(imageSize)
+    backGroundImage.drawInRect(CGRectMake(0, 0, imageSize.width, imageSize.height))
+    image.drawInRect(CGRectMake(imageSize.width*(1.0-scale)*0.5, imageSize.height*(1.0-scale)*0.5, imageSize.width*scale, imageSize.height*scale))
+    let newImage = UIGraphicsGetImageFromCurrentImageContext()
+    UIGraphicsEndImageContext()
+    return newImage
+  }
+  
   //对某个 View 进行截图 (view的部分区域 截图)
   class func convertViewImage(view: UIView, frame: CGSize) -> UIImage{
     UIGraphicsBeginImageContext(frame)
@@ -30,14 +47,22 @@ class MSManageImage {
     return image
   }
   
+  //通过GPUImage 高斯模糊
+  class func gaussianBlurOnImage(imageToBlur: UIImage, blur: Double) -> UIImage {
+    let gauFilter = GPUImageGaussianBlurFilter.init()
+    gauFilter.blurRadiusInPixels = CGFloat(blur)
+    let newImage = gauFilter.imageByFilteringImage(imageToBlur)
+    return newImage
+  }
+  
   //将图片做高斯模糊  blurRadius : 0 - 1 取值
   class func applyBlurOnImage(imageToBlur: UIImage, blur: Double) -> UIImage{
     var blurRadius = blur
-    if ((blurRadius <= 0.0) || (blurRadius > 1.0)) {
+    if ((blurRadius < 0.0) || (blurRadius > 1.0)) {
       blurRadius = 0.5;
     }
     
-    var boxSize = Int(blurRadius * 100);
+    var boxSize = Int(blurRadius * 40);
     boxSize -= (boxSize % 2) + 1;
     
     let rawImage = imageToBlur.CGImage;
@@ -56,10 +81,10 @@ class MSManageImage {
     //手动申请内存
     let pixelBuffer = malloc(CGImageGetBytesPerRow(rawImage) * CGImageGetHeight(rawImage))
     
-    outBuffer.data = pixelBuffer
     outBuffer.width = vImagePixelCount(CGImageGetWidth(rawImage))
     outBuffer.height = vImagePixelCount(CGImageGetHeight(rawImage))
-    outBuffer.rowBytes = CGImageGetBytesPerRow(rawImage);
+    outBuffer.rowBytes = CGImageGetBytesPerRow(rawImage)
+    outBuffer.data = pixelBuffer
     
     var error = vImageBoxConvolve_ARGB8888(&inBuffer,
         &outBuffer, nil,vImagePixelCount(0), vImagePixelCount(0),
@@ -90,5 +115,4 @@ class MSManageImage {
     
     return UIImage(CGImage: imageRef!)
   }
-  
 }

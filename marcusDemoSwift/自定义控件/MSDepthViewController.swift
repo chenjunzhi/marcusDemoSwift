@@ -20,13 +20,12 @@ public enum DepthPopupStyle : Int {
 }
 
 class MSDepthViewController: UIViewController {
-  //  类方法
   //  presentDepthView 参数
   //  view: 需要弹出的View(最终的大小由该View的frame确定)
   //  backgroundColor: 背景色  默认为黑色
   //  duration: 动画时间 0 时则没有动画
   //  popupStyle: 弹出样式
-  //  blur: 高斯模糊值 0 - 1.0
+  //  blur: 高斯模糊值 0 - 1.0 (0:没有高斯模糊效果)
   //  depthSacle: 景深缩放比例 0 - 1.0
   //  completion：退出景深界面后执行的操作
   class func presentDepthView(view: UIView, backgroundColor: UIColor?, animateDuration: NSTimeInterval, popupStyle : DepthPopupStyle, blur: Double, depthSacle: Double, completion: (() -> Void)?) {
@@ -37,7 +36,7 @@ class MSDepthViewController: UIViewController {
     }
     depthVC.animateDuration = animateDuration
     depthVC.popupStyle = popupStyle
-    depthVC.blur = blur
+    depthVC.blur = blur*40.0
     depthVC.depathScale = depthSacle
     depthVC.completion = completion
     if let currentVC = MSApplication.getCurrentTopViewController(){
@@ -71,7 +70,7 @@ class MSDepthViewController: UIViewController {
   var backgroundColor = UIColor.blackColor()
   var animateDuration: NSTimeInterval = 0.5
   var popupStyle: DepthPopupStyle = .Top
-  var blur  = 0.5
+  var blur  = 0.5*40.0
   var depathScale = 0.9
   var completion: (() -> Void)?
   var convertImage = UIImage()
@@ -79,17 +78,30 @@ class MSDepthViewController: UIViewController {
   //背景view
   private var backgroundView = UIView.init(frame: CGRectMake(0, 0, MSApplication.sharedApplication().screenWidth, MSApplication.sharedApplication().screenHeight))
   private var coverView = UIView.init(frame: CGRectMake(0, 0, MSApplication.sharedApplication().screenWidth, MSApplication.sharedApplication().screenHeight))
-  var imageView = UIImageView.init(frame: CGRectMake(0, 0, MSApplication.sharedApplication().screenWidth, MSApplication.sharedApplication().screenHeight))
+  //做动画的View
+  var animationImageView = UIImageView.init(frame: CGRectMake(0, 0, MSApplication.sharedApplication().screenWidth, MSApplication.sharedApplication().screenHeight))
+  //高斯模糊的View
+  var gaussianImageView = UIImageView.init(frame: CGRectMake(0, 0, MSApplication.sharedApplication().screenWidth, MSApplication.sharedApplication().screenHeight))
   private var beginTransform = CGAffineTransform()
   
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = UIColor.clearColor()
     view.addSubview(backgroundView)
-    view.addSubview(imageView)
-    visualEffectView.frame = coverView.frame
-    imageView.addSubview(visualEffectView)
-    coverView.backgroundColor = UIColor(colorLiteralRed: 20/255.0, green: 20/255.0, blue: 20/255.0, alpha: 0.5)
+    view.addSubview(animationImageView)
+    view.addSubview(gaussianImageView)
+    gaussianImageView.backgroundColor = UIColor.clearColor()
+    gaussianImageView.hidden = true
+    //转高斯模糊效果图片方法
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { () -> Void in
+      weak var tempSelf = self
+      let scaleImage = MSManageImage.scaleImage((tempSelf?.convertImage)!, scale: CGFloat((tempSelf?.depathScale)!), background: (tempSelf?.backgroundColor)!)
+      let gaussianImage = MSManageImage.gaussianBlurOnImage(scaleImage, blur: tempSelf!.blur)
+      dispatch_async(dispatch_get_main_queue(), { () -> Void in
+        tempSelf?.gaussianImageView.image = gaussianImage
+      })
+    }
+    coverView.backgroundColor = UIColor(colorLiteralRed: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 0.5)
     view.addSubview(coverView)
   }
   
@@ -101,7 +113,7 @@ class MSDepthViewController: UIViewController {
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(animated)
     backgroundView.backgroundColor = backgroundColor
-    imageView.image = convertImage
+    animationImageView.image = convertImage
     let tap = UITapGestureRecognizer(target: self, action: "dissmissPresentView")
     coverView.addGestureRecognizer(tap)
     self.popupPosition()
@@ -113,9 +125,11 @@ class MSDepthViewController: UIViewController {
     if (animateDuration == 0){
       self.animatePopupWithStyle()
     }else{
-      UIView.animateWithDuration(animateDuration) { () -> Void in
+      UIView.animateWithDuration(animateDuration, animations: { () -> Void in
         self.animatePopupWithStyle()
-      }
+        }, completion: { (Bool) -> Void in
+          self.gaussianImageView.hidden = false
+      })
     }
   }
   
@@ -152,7 +166,8 @@ class MSDepthViewController: UIViewController {
   
   //MARK 初始化presentView 的位置 及初始值
   func popupPosition(){
-    imageView.transform = self.beginTransform
+    gaussianImageView.hidden = true
+    animationImageView.transform = self.beginTransform
     coverView.alpha = 0.5
     visualEffectView.alpha = 0
     var rect = presentView?.frame
@@ -188,7 +203,7 @@ class MSDepthViewController: UIViewController {
   
   //MARK presentView 动画的方式弹出到特定位置 及最终值
   func animatePopupWithStyle() {
-    imageView.transform = CGAffineTransformMakeScale(CGFloat(depathScale), CGFloat(depathScale))
+    animationImageView.transform = CGAffineTransformMakeScale(CGFloat(depathScale), CGFloat(depathScale))
     coverView.alpha = 0.5
     visualEffectView.alpha = CGFloat(blur)
     var rect = presentView?.frame
