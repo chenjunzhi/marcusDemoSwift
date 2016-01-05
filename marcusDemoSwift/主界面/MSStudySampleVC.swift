@@ -66,19 +66,19 @@ class MSStudySampleVC: UIViewController,UITableViewDelegate,UITableViewDataSourc
     switch(indexPath.row){
     case 0:
       tempView.frame = CGRectMake(0, 0, MSApplication.sharedApplication().screenWidth, MSApplication.sharedApplication().screenHeight/2)
-      MSDepthViewController.presentDepthView(tempView, backgroundColor: nil, animateDuration: 0.3, popupStyle: DepthPopupStyle.Top, blur: 0.1, depthSacle: 0.9)
+      MSDepthViewController.presentDepthView(tempView, popupStyle: DepthPopupStyle.Top, backgroundColor: nil, animateDuration: 0.5, blur: 0.1, realTimeBlur: true, depthSacle: 0.9, completion: nil)
       break
     case 1:
       tempView.frame = CGRectMake(0, 0, MSApplication.sharedApplication().screenWidth, MSApplication.sharedApplication().screenHeight/2)
-      MSDepthViewController.presentDepthView(tempView, backgroundColor: nil, animateDuration: 0.3, popupStyle: DepthPopupStyle.Bottom, blur: 0.2, depthSacle: 0.9)
+      MSDepthViewController.presentDepthView(tempView, popupStyle: DepthPopupStyle.Bottom, backgroundColor: nil, animateDuration: 0.5, blur: 0.1, realTimeBlur: true, depthSacle: 0.9, completion: nil)
       break
     case 2:
       tempView.frame = CGRectMake(0, 0, MSApplication.sharedApplication().screenWidth/2, MSApplication.sharedApplication().screenHeight)
-      MSDepthViewController.presentDepthView(tempView, backgroundColor: nil, animateDuration: 0.3, popupStyle: DepthPopupStyle.Left, blur: 0.4, depthSacle: 0.9)
+      MSDepthViewController.presentDepthView(tempView, popupStyle: DepthPopupStyle.Left, backgroundColor: nil, animateDuration: 0.5, blur: 0.1, realTimeBlur: true, depthSacle: 0.9, completion: nil)
       break
     case 3:
       tempView.frame = CGRectMake(0, 0, MSApplication.sharedApplication().screenWidth/2, MSApplication.sharedApplication().screenHeight)
-      MSDepthViewController.presentDepthView(tempView, backgroundColor: UIColor.whiteColor(), animateDuration: 0.3, popupStyle: DepthPopupStyle.Right, blur:0.6, depthSacle: 0.9)
+      MSDepthViewController.presentDepthView(tempView, popupStyle: DepthPopupStyle.Right, backgroundColor: nil, animateDuration: 0.5, blur: 0.1, realTimeBlur: true, depthSacle:1.0, completion: nil)
       break
     case 4:
       let gpuVC = MSGPUViewController.init()
