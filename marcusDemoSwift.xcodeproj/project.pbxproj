@@ -190,6 +190,7 @@
 		2C238D261C3A568C00635B91 /* GPUImagePicture.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C238C781C3A568C00635B91 /* GPUImagePicture.m */; };
 		2C238D271C3A568C00635B91 /* GPUImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C238C7A1C3A568C00635B91 /* GPUImageView.m */; };
 		2C57E5841C2BD01D0098A583 /* MSApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C57E5831C2BD01D0098A583 /* MSApplication.swift */; };
+		2C5BAED81C3E10EB009AD574 /* MSLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5BAED71C3E10EB009AD574 /* MSLog.swift */; };
 		2C747D6C1C243C45002DEC78 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C747D6B1C243C45002DEC78 /* Assets.xcassets */; };
 		2C76384E1C030284008D8C5B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76384D1C030284008D8C5B /* AppDelegate.swift */; };
 		2C7638501C030284008D8C5B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C76384F1C030284008D8C5B /* ViewController.swift */; };
@@ -586,6 +587,7 @@
 		2C238C791C3A568C00635B91 /* GPUImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPUImageView.h; sourceTree = "<group>"; };
 		2C238C7A1C3A568C00635B91 /* GPUImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPUImageView.m; sourceTree = "<group>"; };
 		2C57E5831C2BD01D0098A583 /* MSApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MSApplication.swift; path = ../../MSApplication.swift; sourceTree = "<group>"; };
+		2C5BAED71C3E10EB009AD574 /* MSLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MSLog.swift; sourceTree = "<group>"; };
 		2C747D6B1C243C45002DEC78 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2C76384A1C030284008D8C5B /* marcusDemoSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = marcusDemoSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C76384D1C030284008D8C5B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -642,6 +644,7 @@
 				2C57E5831C2BD01D0098A583 /* MSApplication.swift */,
 				2C1A90F51C2AACFD009C405D /* GlobalDefine.swift */,
 				2C81921B1C2D17DB00BA619F /* MSManageImage.swift */,
+				2C5BAED71C3E10EB009AD574 /* MSLog.swift */,
 			);
 			path = "全局定义";
 			sourceTree = "<group>";
@@ -1477,6 +1480,7 @@
 				2C238CB31C3A568C00635B91 /* GPUImageGlassSphereFilter.m in Sources */,
 				2C238C801C3A568C00635B91 /* GPUImageAlphaBlendFilter.m in Sources */,
 				2C238CA41C3A568C00635B91 /* GPUImageErosionFilter.m in Sources */,
+				2C5BAED81C3E10EB009AD574 /* MSLog.swift in Sources */,
 				2C238C891C3A568C00635B91 /* GPUImageCannyEdgeDetectionFilter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

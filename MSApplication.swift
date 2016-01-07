@@ -13,10 +13,15 @@ class MSApplication: NSObject {
   //对象单例
   static let applicationObj: MSApplication = MSApplication()
   
-  // 屏幕尺寸
+  /// 屏幕宽度
   let screenWidth = UIScreen.mainScreen().bounds.width
+  /// 屏幕高度
   let screenHeight = UIScreen.mainScreen().bounds.height
-  
+    /**
+     <#Description#>
+     
+     - returns: <#return value description#>
+     */
   var phoneCallView: UIWebView?
  
   class func sharedApplication() -> MSApplication {

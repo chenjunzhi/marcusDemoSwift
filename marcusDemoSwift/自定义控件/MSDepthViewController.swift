@@ -20,23 +20,29 @@ public enum DepthPopupStyle : Int {
 }
 
 class MSDepthViewController: UIViewController {
-    //  presentDepthView 参数
-    //  1、view: 需要弹出的View(最终的大小由该View的frame确定) 必须传
-    //  2、backgroundColor: 背景色  默认: 黑色
-    //  3、duration: 动画时间 0 时则没有动画  默认: 0.5
-    //  4、popupStyle: 弹出样式  必须传
-    //  5、blur: 高斯模糊值 0 - 1.0 (0:没有高斯模糊效果)  默认: 0.1
-    //  6、realTimeBlur: 是否需要实时高斯模糊  默认: true  当动画时间为零时，该值参数无效
-    //  7、depthSacle: 景深缩放比例 0 - 1.0   默认：0.9
-    //  8、completion：退出景深界面后执行的操作  默认: nil
+   
+    /**
+     //1.简单调用方式
     
-    //1.简单调用方式
+    - parameter view:       需要弹出的View(最终的大小由该View的frame确定) 必须传
+    - parameter popupStyle: 弹出样式  必须传
+    */
     class func presentDepthView(view: UIView, popupStyle : Int) {
         MSDepthViewController.presentDepthView(view, popupStyle: popupStyle, backgroundColor: UIColor.blackColor(), animateDuration: 0.5, blur: 0.1, realTimeBlur: true,depthSacle: 0.9) { () -> Void in
         }
     }
-    
-    //1.专业调用方式
+    /**
+     1.专业调用方式
+     
+     - parameter view:            需要弹出的View(最终的大小由该View的frame确定) 必须传
+     - parameter popupStyle:      弹出样式  必须传
+     - parameter backgroundColor: 背景色  默认: 黑色
+     - parameter animateDuration: 动画时间 0 时则没有动画  默认: 0.5
+     - parameter blur:            高斯模糊值 0 - 1.0 (0:没有高斯模糊效果)  默认: 0.1
+     - parameter realTimeBlur:    是否需要实时高斯模糊  默认: true  当动画时间为零时，该值参数无效
+     - parameter depthSacle:      景深缩放比例 0 - 1.0   默认：0.9
+     - parameter completion:      退出景深界面后执行的操作  默认: nil
+     */
     class func presentDepthView(view: UIView, popupStyle : Int, backgroundColor: UIColor?, animateDuration: NSTimeInterval, blur: Double, realTimeBlur: Bool, depthSacle: Double, completion: (() -> Void)?) {
         let depthVC = MSDepthViewController()
         depthVC.presentView = view
@@ -86,6 +92,9 @@ class MSDepthViewController: UIViewController {
     var animationImageView = UIImageView.init(frame: CGRectMake(0, 0, MSApplication.sharedApplication().screenWidth, MSApplication.sharedApplication().screenHeight))
     
     override func viewDidLoad() {
+        #if DEBUG
+            printLog("景深效果ViewDidLoad")
+        #endif
         super.viewDidLoad()
         view.addSubview(backgroundView)
         
@@ -108,6 +117,9 @@ class MSDepthViewController: UIViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
+        #if DEBUG
+            printLog("景深效果viewWillAppear")
+        #endif
         super.viewWillAppear(animated)
         backgroundView.backgroundColor = backgroundColor
         let tap = UITapGestureRecognizer(target: self, action: "dissmissPresentView")
