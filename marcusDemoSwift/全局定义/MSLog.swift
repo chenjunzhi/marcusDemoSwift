@@ -17,9 +17,9 @@ import Foundation
  - parameter line:    __LINE__
  */
 func printLog<T>(message: T,
-                    file: String = __FILE__,
-                  Method: String = __FUNCTION__,
-                    line: Int = __LINE__)
+                    file: String = #file,
+                  Method: String = #function,
+                    line: Int = #line)
 {
     print("\((file as NSString).lastPathComponent)[\(line)],\(Method): \(message)]")
 }

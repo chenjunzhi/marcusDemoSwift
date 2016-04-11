@@ -64,7 +64,7 @@ class MSGPUViewController: UIViewController {
   
   
   @IBAction func click(sender: UIButton) {
-    let timer = NSTimer.scheduledTimerWithTimeInterval(0.08, target: self, selector: "gaussianBlurImage", userInfo: nil, repeats: true)
+    let timer = NSTimer.scheduledTimerWithTimeInterval(0.08, target: self, selector: #selector(MSGPUViewController.gaussianBlurImage), userInfo: nil, repeats: true)
     
     if (!bChange){
       UIView.animateWithDuration(0.5, animations: { () -> Void in

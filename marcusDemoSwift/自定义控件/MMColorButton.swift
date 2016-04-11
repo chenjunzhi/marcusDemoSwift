@@ -281,7 +281,7 @@ public struct MMColorButtonEdgeCorner : OptionSetType {
     
     override func animationDidStop(anim: CAAnimation, finished flag: Bool) {
         if let transform = anim as? CABasicAnimation where transform.keyPath == "transform" {
-            animateStepIndex++
+            animateStepIndex += 1
             self.sharkAnimate()
         }
     }

@@ -28,7 +28,7 @@ class MSGuideViewController: MSViewController,UIScrollViewDelegate {
     scrollView.delegate = self
     imageArray = ["guide1","guide2","guide3"]
     constraintContentWidth.constant = imageArray.count*screenWidth
-    for (var i = 0; i < 3; i++){
+    for i in 1...3 {
       let imageView = UIImageView(image: UIImage(named: imageArray[i]))
       imageView.frame = CGRect.init(i*screenWidth, 0, screenWidth, screenHeight)
       imageView.userInteractionEnabled = true
@@ -38,12 +38,12 @@ class MSGuideViewController: MSViewController,UIScrollViewDelegate {
         button.setBackgroundImage(UIImage(named: "togetter"), forState: UIControlState.Normal)
         button.center = CGPoint.init(x: screenWidth/2, y: view.bottom - screenHeight/3.0)
         imageView.addSubview(button)
-        button.addTarget(self, action: "beginButtonClick:", forControlEvents: UIControlEvents.TouchUpInside)
+        button.addTarget(self, action: #selector(MSGuideViewController.beginButtonClick(_:)), forControlEvents: UIControlEvents.TouchUpInside)
       }
     }
     pageControl.numberOfPages = imageArray.count
     pageControl.currentPage = 0
-    pageControl.addTarget(self, action: "pageChange:", forControlEvents: UIControlEvents.ValueChanged)
+    pageControl.addTarget(self, action: #selector(MSGuideViewController.pageChange(_:)), forControlEvents: UIControlEvents.ValueChanged)
     pageControl.currentPageIndicatorTintColor = UIColor.init(colorCode: 0xDF3448)
     pageControl.pageIndicatorTintColor = UIColor.init(colorCode: 0x999999)
     view.bringSubviewToFront(pageControl)

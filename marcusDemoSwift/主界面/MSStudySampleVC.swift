@@ -58,7 +58,7 @@ class MSStudySampleVC: UIViewController,UITableViewDelegate,UITableViewDataSourc
     let tempView = UIView.init()
     let button = UIButton.init(frame: CGRectMake(0, 0, 100, 60))
     button.backgroundColor = UIColor.whiteColor()
-    button.addTarget(self, action: "buttonClick", forControlEvents: .TouchUpInside)
+    button.addTarget(self, action: #selector(MSStudySampleVC.buttonClick), forControlEvents: .TouchUpInside)
     button.setTitle("关闭弹出框", forState: .Normal)
     button.setTitleColor(UIColor.blackColor(), forState: .Normal)
     tempView.backgroundColor = UIColor.redColor()

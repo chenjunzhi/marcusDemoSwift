@@ -43,7 +43,7 @@ class THSelectBoard: UIView {
                     
                     button.titleLabel?.font = UIFont(name: "STHeitiSC", size: 16)
                     button.setTitle(title, forState: .Normal)
-                    button.addTarget(self, action: "handleButton:", forControlEvents: .TouchUpInside)
+                    button.addTarget(self, action: #selector(THSelectBoard.handleButton(_:)), forControlEvents: .TouchUpInside)
                     self.addSubview(button)
                     buttons.append(button)
                     
@@ -149,7 +149,7 @@ class THSelectBoard: UIView {
         board.translatesAutoresizingMaskIntoConstraints = false
         let bgMask = UIView(frame: UIScreen.mainScreen().bounds)
         bgMask.backgroundColor = UIColor(colorCode: 0x0, alpha: 0.7)
-        bgMask.addGestureRecognizer(UITapGestureRecognizer(target: board, action: "handleHidden:"))
+        bgMask.addGestureRecognizer(UITapGestureRecognizer(target: board, action: #selector(THSelectBoard.handleHidden(_:))))
         
         window.addSubview(bgMask)
         window.addSubview(board)

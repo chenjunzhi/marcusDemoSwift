@@ -122,7 +122,7 @@ class MSDepthViewController: UIViewController {
         #endif
         super.viewWillAppear(animated)
         backgroundView.backgroundColor = backgroundColor
-        let tap = UITapGestureRecognizer(target: self, action: "dissmissPresentView")
+        let tap = UITapGestureRecognizer(target: self, action: #selector(MSDepthViewController.dissmissPresentView as (MSDepthViewController) -> () -> ()))
         coverView.addGestureRecognizer(tap)
         self.popupPosition()
     }
@@ -136,7 +136,7 @@ class MSDepthViewController: UIViewController {
         }else{
             var timer: NSTimer?
             if (realTimeBlur){
-                timer = NSTimer.scheduledTimerWithTimeInterval(intervalTime, target: self, selector: "gaussianBlurImageWithAnimation", userInfo: nil, repeats: true)
+                timer = NSTimer.scheduledTimerWithTimeInterval(intervalTime, target: self, selector: #selector(MSDepthViewController.gaussianBlurImageWithAnimation), userInfo: nil, repeats: true)
             }
             UIView.animateWithDuration(animateDuration, animations: { () -> Void in
                 self.animatePopupWithStyle()
@@ -159,7 +159,7 @@ class MSDepthViewController: UIViewController {
         if (animation){
             var timer: NSTimer?
             if (realTimeBlur){
-                timer = NSTimer.scheduledTimerWithTimeInterval(intervalTime, target: self, selector: "gaussianBlurImageWithAnimation", userInfo: nil, repeats: true)
+                timer = NSTimer.scheduledTimerWithTimeInterval(intervalTime, target: self, selector: #selector(MSDepthViewController.gaussianBlurImageWithAnimation), userInfo: nil, repeats: true)
             }
             UIView.animateWithDuration(animateDuration, animations: { () -> Void in
                 self.popupPosition()

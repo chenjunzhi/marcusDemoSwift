@@ -58,7 +58,7 @@ extension UIPageControl : MMPageControllType {
         didSet {
             if autoScroll {
                 if !autoRunTimer.valid {
-                    autoRunTimer = NSTimer.scheduledTimerWithTimeInterval(autoScrollInterval, target: self, selector: "handleTimer", userInfo: nil, repeats: true)
+                    autoRunTimer = NSTimer.scheduledTimerWithTimeInterval(autoScrollInterval, target: self, selector: #selector(MMCycelScrollView.handleTimer), userInfo: nil, repeats: true)
                 }
             } else {
                 autoRunTimer.invalidate()
@@ -71,7 +71,7 @@ extension UIPageControl : MMPageControllType {
         didSet {
             if autoRunTimer.valid {
                 autoRunTimer.invalidate()
-                autoRunTimer = NSTimer.scheduledTimerWithTimeInterval(autoScrollInterval, target: self, selector: "handleTimer", userInfo: nil, repeats: true)
+                autoRunTimer = NSTimer.scheduledTimerWithTimeInterval(autoScrollInterval, target: self, selector: #selector(MMCycelScrollView.handleTimer), userInfo: nil, repeats: true)
             }
         }
     }
@@ -222,7 +222,7 @@ extension UIPageControl : MMPageControllType {
         
         contentView.backgroundColor = UIColor.clearColor()
         contentView.frame = CGRect(origin: CGPointZero, size: CGSize(3*self.width, self.height))
-        contentView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "handleClick"))
+        contentView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(MMCycelScrollView.handleClick)))
         scrollView.addSubview(contentView)
     }
     
@@ -260,7 +260,7 @@ extension UIPageControl : MMPageControllType {
 
     dynamic internal override func willMoveToSuperview(newSuperview: UIView?) {
         if let _ = newSuperview where autoScroll && !autoRunTimer.valid {
-            autoRunTimer = NSTimer.scheduledTimerWithTimeInterval(autoScrollInterval, target: self, selector: "handleTimer", userInfo: nil, repeats: true)
+            autoRunTimer = NSTimer.scheduledTimerWithTimeInterval(autoScrollInterval, target: self, selector: #selector(MMCycelScrollView.handleTimer), userInfo: nil, repeats: true)
         } else if autoRunTimer.valid {
             autoRunTimer.invalidate()
         }
@@ -358,9 +358,9 @@ extension UIPageControl : MMPageControllType {
     
     dynamic internal func scrollViewDidScroll(scrollView: UIScrollView) {
         if scrollView.contentOffset.x <= 0 {
-            currentPage--
+            currentPage -= 1
         } else if scrollView.contentOffset.x >= 2*self.width {
-            currentPage++
+            currentPage += 1
         }
     }
     
@@ -386,7 +386,7 @@ extension UIPageControl : MMPageControllType {
     */
     func scrollRun() {
         if !autoRunTimer.valid {
-            autoRunTimer = NSTimer.scheduledTimerWithTimeInterval(autoScrollInterval, target: self, selector: "handleTimer", userInfo: nil, repeats: true)
+            autoRunTimer = NSTimer.scheduledTimerWithTimeInterval(autoScrollInterval, target: self, selector: #selector(MMCycelScrollView.handleTimer), userInfo: nil, repeats: true)
         }
     }
     /**

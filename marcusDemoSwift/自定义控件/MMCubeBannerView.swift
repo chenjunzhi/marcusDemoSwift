@@ -31,7 +31,7 @@ import UIKit
         didSet {
             if autoScroll {
                 if !autoRunTimer.valid {
-                    autoRunTimer = NSTimer.scheduledTimerWithTimeInterval(autoScrollInterval, target: self, selector: "handleTimer", userInfo: nil, repeats: true)
+                    autoRunTimer = NSTimer.scheduledTimerWithTimeInterval(autoScrollInterval, target: self, selector: #selector(MMCubeBannerView.handleTimer), userInfo: nil, repeats: true)
                 }
             } else {
                 autoRunTimer.invalidate()
@@ -163,12 +163,12 @@ import UIKit
     }
     
     private func initGestureRecognizers() {
-        contentView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "handleClick"))
-        let left = UISwipeGestureRecognizer(target: self, action: "handleSwip:")
+        contentView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(MMCubeBannerView.handleClick)))
+        let left = UISwipeGestureRecognizer(target: self, action: #selector(MMCubeBannerView.handleSwip(_:)))
         left.direction = .Left
         left.delegate = self
         contentView.addGestureRecognizer(left)
-        let right = UISwipeGestureRecognizer(target: self, action: "handleSwip:")
+        let right = UISwipeGestureRecognizer(target: self, action: #selector(MMCubeBannerView.handleSwip(_:)))
         right.direction = .Right
         right.delegate = self
         contentView.addGestureRecognizer(right)
@@ -176,7 +176,7 @@ import UIKit
     
     dynamic internal override func willMoveToSuperview(newSuperview: UIView?) {
         if let _ = newSuperview where autoScroll && !autoRunTimer.valid {
-            autoRunTimer = NSTimer.scheduledTimerWithTimeInterval(autoScrollInterval, target: self, selector: "handleTimer", userInfo: nil, repeats: true)
+            autoRunTimer = NSTimer.scheduledTimerWithTimeInterval(autoScrollInterval, target: self, selector: #selector(MMCubeBannerView.handleTimer), userInfo: nil, repeats: true)
         }
     }
     
@@ -200,9 +200,9 @@ import UIKit
         if !turning {
             switch sender.direction {
             case UISwipeGestureRecognizerDirection.Left :
-                currentPage++
+                currentPage += 1
             case UISwipeGestureRecognizerDirection.Right :
-                currentPage--
+                currentPage -= 1
             default :
                 break
             }
@@ -223,7 +223,7 @@ import UIKit
     }
     
     dynamic private func handleTimer() {
-        currentPage++
+        currentPage += 1
     }
     
     private func switchPage(indexAdd: Bool) {
@@ -292,7 +292,7 @@ import UIKit
     */
     func scrollRun() {
         if !autoRunTimer.valid {
-            autoRunTimer = NSTimer.scheduledTimerWithTimeInterval(autoScrollInterval, target: self, selector: "handleTimer", userInfo: nil, repeats: true)
+            autoRunTimer = NSTimer.scheduledTimerWithTimeInterval(autoScrollInterval, target: self, selector: #selector(MMCubeBannerView.handleTimer), userInfo: nil, repeats: true)
         }
     }
     /**

@@ -114,9 +114,9 @@ func |-|(lhs: UIView, rhs: UIView) -> CGFloat {return lhs.center |-| rhs.center}
 - parameter line:   所在行
 */
 func MMLog(items: Any... ,
-    file: String = __FILE__,
-    method: String = __FUNCTION__,
-    line: Int = __LINE__) {
+    file: String = #file,
+    method: String = #function,
+    line: Int = #line) {
     #if DEBUG
         let formatter = NSDateFormatter()
         formatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
@@ -135,9 +135,9 @@ func MMLog(items: Any... ,
 /**
  输出标记
  */
-func Mark( file: String = __FILE__,
-    method: String = __FUNCTION__,
-    line: Int = __LINE__) {
+func Mark( file: String = #file,
+    method: String = #function,
+    line: Int = #line) {
     MMLog("- MARK -", file: file, method: method, line: line)
 }
 /// 屏幕尺寸
@@ -184,12 +184,12 @@ func getCurrentViewController() -> UIViewController? {
     } else {
         assertionFailure("ShareKit: Could not find a root view controller.  You can assign one manually by calling [[SHK currentHelper] setRootViewController:YOURROOTVIEWCONTROLLER].")
     }
-    while result!.respondsToSelector("rootViewController") || result!.respondsToSelector("topViewController") || result!.respondsToSelector("selectedViewController") {
-        if result!.respondsToSelector("rootViewController") && result!.valueForKey("rootViewController") != nil {
+    while result!.respondsToSelector(Selector("rootViewController")) || result!.respondsToSelector(Selector("topViewController")) || result!.respondsToSelector(Selector("selectedViewController")) {
+        if result!.respondsToSelector(Selector("rootViewController")) && result!.valueForKey("rootViewController") != nil {
             result = (result!.valueForKey("rootViewController") as! UIViewController)
-        } else if result!.respondsToSelector("topViewController") {
+        } else if result!.respondsToSelector(Selector("topViewController")) {
             result = (result!.valueForKey("topViewController") as! UIViewController)
-        } else if result!.respondsToSelector("selectedViewController") {
+        } else if result!.respondsToSelector(Selector("selectedViewController")) {
             result = (result!.valueForKey("selectedViewController") as! UIViewController)
         }
     }
@@ -346,9 +346,9 @@ extension UIView {
     func moveBy(delta: CGPoint) {origin += delta}
     func scaleBy(scale: CGFloat) {size *= scale}
     // anchorPoint  (0.0, 0.0) - (1.0, 1.0)
-    func resize(size: CGSize, var atAnchorPoint anchor: CGPoint) {
-        anchor = CGPoint(x: max(0, min(1, anchor.x)), y: max(0, min(1, anchor.y)))
-        frame = CGRect(origin: origin - CGPoint(x: (size.width - width) * anchor.x, y: (size.height - height) * anchor.y), size: size)
+    func resize(size: CGSize, atAnchorPoint anchor: CGPoint) {
+       let anchorTemp = CGPoint(x: max(0, min(1, anchor.x)), y: max(0, min(1, anchor.y)))
+        frame = CGRect(origin: origin - CGPoint(x: (size.width - width) * anchorTemp.x, y: (size.height - height) * anchorTemp.y), size: size)
     }
     func fitIn(size: CGSize) {
         if self.size.ratio > size.ratio {
@@ -383,11 +383,11 @@ extension CALayer {
     
     // 替换 系统方法 实现
     class func switchImplementations() {
-        var sysMethod = class_getInstanceMethod(self, "addSublayer:")
-        var customMethod = class_getInstanceMethod(self, "customAddSublayer:")
+        var sysMethod = class_getInstanceMethod(self, #selector(CALayer.addSublayer(_:)))
+        var customMethod = class_getInstanceMethod(self, #selector(CALayer.customAddSublayer(_:)))
         method_exchangeImplementations(sysMethod, customMethod)
-        sysMethod = class_getInstanceMethod(self, "removeFromSuperlayer")
-        customMethod = class_getInstanceMethod(self, "customRemoveFromSuperlayer")
+        sysMethod = class_getInstanceMethod(self, #selector(CALayer.removeFromSuperlayer))
+        customMethod = class_getInstanceMethod(self, #selector(CALayer.customRemoveFromSuperlayer))
         method_exchangeImplementations(sysMethod, customMethod)
     }
     // 自定义添加子Layer方法
